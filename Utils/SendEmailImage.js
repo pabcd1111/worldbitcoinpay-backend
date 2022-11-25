@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-module.exports = function SendEmail(head, body, emailAddress, attachment) {
+module.exports = function SendEmailImage(head, body, emailAddress, attachment, attachType) {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -18,10 +18,8 @@ module.exports = function SendEmail(head, body, emailAddress, attachment) {
         <div style="margin:50px auto;width:70%;padding:20px 0">
         <img src="cid:logo" alt="logo" style="width: 20%" />
           <div style="border-bottom:1px solid #eee">
-          </div>
-          
-          <p>${body}</p>
-          <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${head}</h2>
+            <p>${body}</p>
+          ${attachType === 'withdraw' ? `<img src="cid:withdraw" alt="withdraw" style="width: 100%" />` : `<img src="cid:activate" alt="activate" style="width: 100%" />`}
           <p style="font-size:0.9em;">Regards,<br />Worldbitcoinpay Team<br />Copyright 2022-Worldbitcoinpay-All rights reserved.</p>
           <hr style="border:none;border-top:1px solid #eee" />
           <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
