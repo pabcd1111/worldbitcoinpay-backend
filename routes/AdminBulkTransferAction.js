@@ -10,6 +10,8 @@ const mongoose = require("mongoose")
 const Transaction = require("../Utils/Transaction");
 const SendEmail = require("../Utils/SendEmail");
 
+const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },]
+
 module.exports = async function AdminBulkTransferAction(req, res) {
 
     if (req.body.password === "" || req.body.action === "" || req.body.amount === "" || req.body.reason === "") {
@@ -31,7 +33,7 @@ module.exports = async function AdminBulkTransferAction(req, res) {
                             function (error, resp) {
                                 resp.forEach(async (element) => {
                                     await Transaction(element.userId, req.body.amount, "credit", ``, req.body.reason)
-                                    await SendEmail(`$${req.body.amount} Credited!`, `Your account has been credited by $${req.body.amount}`, element.email)
+                                    await SendEmail(`$${req.body.amount} Credited!`, `Your account has been credited by $${req.body.amount}`, element.email, attachment)
                                 });
                             }
                         )

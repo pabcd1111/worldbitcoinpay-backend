@@ -10,6 +10,8 @@ const mongoose = require("mongoose")
 const Transaction = require("../Utils/Transaction");
 const SendEmail = require("../Utils/SendEmail")
 
+const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },]
+
 module.exports = async function FundTransfer(req, res) {
 
     if (req.body.userId === "" || req.body.targetEmail === "" || req.body.amount === "" || req.body.reason === "") {
@@ -43,10 +45,10 @@ module.exports = async function FundTransfer(req, res) {
                                 let receiverUpdateBalance = parseInt(receiverCurrentBalance) + parseInt(req.body.amount)
                                 await sender.updateOne({ balance: senderUpdateBalance })
                                 await Transaction(senderId, req.body.amount, "debit", `${resp.fName} ${resp.lName}`, req.body.reason)
-                                await SendEmail(`$${req.body.amount} Credited!`, `Your account has been credited by $${req.body.amount}`, resp.email)
+                                await SendEmail(`$${req.body.amount} Credited!`, `Your account has been credited by $${req.body.amount}`, resp.email, attachment)
                                 await receiver.updateOne({ balance: receiverUpdateBalance })
                                 await Transaction(receiverId, req.body.amount, "credit", `${response.fName} ${response.lName}`, req.body.reason)
-                                await SendEmail(`$${req.body.amount} Debited!`, `Your account has been debited by $${req.body.amount}`, response.email)
+                                await SendEmail(`$${req.body.amount} Debited!`, `Your account has been debited by $${req.body.amount}`, response.email, attachment)
 
                                 res.status(200).json({ message: "Balance Updated" })
                             } else if (parseInt(req.body.amount) <= 0) {

@@ -78,7 +78,7 @@ module.exports = async function SignupStep1(req, res) {
             message: "This email is already registered."
         })
     } else {
-
+        const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },]
 
         let password = await bcrypt.hash(req.body.password, 5);
         const otp = randomize('0', 6)
@@ -103,13 +103,13 @@ module.exports = async function SignupStep1(req, res) {
         const options = {
             from: "testiqapex@gmail.com",
             to: `${email}`,
-            subject: "One time password for SBP",
+            subject: "One time password for WBP",
             html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
         <div style="margin:50px auto;width:70%;padding:20px 0">
           <div style="border-bottom:1px solid #eee">
             <form></form>
           </div>
-          <img src="https://swiftbusinesspay.com/static/media/Logo.d543260aeee6b2229f21.jpg" alt="logo" style="width: 100%"/>
+          <img src="cid:logo" alt="logo" style="width: 20%"/>
           <p>Your Email One Time Password (OTP) to log in to your World Bitcoin Pay account is </p>
           <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>
           <p>The OTP is valid for 5 minutes.<br/> This OTP will be used to verify the device you are logging in from. For account safety, do not share yout OTP with others.</p>
@@ -119,7 +119,8 @@ module.exports = async function SignupStep1(req, res) {
        
           </div>
         </div>
-      </div>`
+      </div>`,
+      attachments: attachment
         };
 
         transporter.sendMail(options, (err, info) => {

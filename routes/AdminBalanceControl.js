@@ -10,6 +10,7 @@ const mongoose = require("mongoose")
 const Transaction = require("../Utils/Transaction")
 const SendEmail = require("../Utils/SendEmail")
 
+const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },]
 
 module.exports = async function AdminBalanceControl(req, res) {
 
@@ -36,7 +37,7 @@ module.exports = async function AdminBalanceControl(req, res) {
                 let updateBalance = parseInt(currentBalance) + parseInt(req.body.amount);
                 await user.updateOne({ balance: updateBalance });
                 await Transaction(req.body.userId, req.body.amount, "credit", ``, req.body.reason)
-                await SendEmail(`$${req.body.amount} Credited!`, `Your account has been credited by $${req.body.amount}`, response.email)
+                await SendEmail(`$${req.body.amount} Credited!`, `Your account has been credited by $${req.body.amount}`, response.email, attachment)
                 res.status(200).json({ message: "Amount Credited" });
             } else if (req.body.action === "debit") {
                 
@@ -44,7 +45,7 @@ module.exports = async function AdminBalanceControl(req, res) {
                     let updateBalance = parseInt(currentBalance) - parseInt(req.body.amount);
                     await user.updateOne({ balance: updateBalance });
                     await Transaction(req.body.userId, req.body.amount, "debit", ``, req.body.reason)
-                    await SendEmail(`$${req.body.amount} Debited!`, `Your account has been debited by $${req.body.amount}`, response.email)
+                    await SendEmail(`$${req.body.amount} Debited!`, `Your account has been debited by $${req.body.amount}`, response.email, attachment)
                     res.status(200).json({ message: "Amount Debited" });
                 }else{
                     res.status(202).json({message: "Insufficient balance"});

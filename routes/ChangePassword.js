@@ -8,6 +8,9 @@ const mongoose = require("mongoose")
 // }
 const bcrypt = require("bcryptjs");
 const SendEmail = require("../Utils/SendEmail")
+
+const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' }]
+
 module.exports = async function ChangePassword(req, res) {
 
     const userExists = await mongoose.model("User").findOne({ userId: req.body.otpId });
@@ -40,7 +43,7 @@ module.exports = async function ChangePassword(req, res) {
                             async function (err, response) {
                                 await userExists.updateOne({ password: password });
                                 res.status(200).json({ message: "Password Changed" })
-                                SendEmail("Password Changed", "Password for your account has been successfully changed.", response.email);
+                                SendEmail("Password Changed", "Password for your account has been successfully changed.", response.email, attachment);
                             }
                         )
 

@@ -18,6 +18,8 @@ module.exports = async function HandleOtp(req, res) {
   var minutes = parseInt(today.getMinutes()) + 5; //OTP validation for 5 minutes
   var time = today.getHours() + ":" + minutes + ":" + today.getSeconds();
 
+  const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },]
+
   const timedOtp = {
     otp: otp,
     timeStamp: time
@@ -37,7 +39,7 @@ module.exports = async function HandleOtp(req, res) {
     subject: "Account Status",
     html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
         <div style="margin:50px auto;width:70%;padding:20px 0">
-        <img src="https://swiftbusinesspay.com/static/media/Logo.d543260aeee6b2229f21.jpg" alt="logo" style="width: 100%" />
+        <img src="cid:logo" alt="logo" style="width: 20%" />
           <div style="border-bottom:1px solid #eee">
             <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">Hi</a>
           </div>
@@ -51,7 +53,8 @@ module.exports = async function HandleOtp(req, res) {
        
           </div>
         </div>
-      </div>`
+      </div>`,
+      attachments: attachment
   };
 
 
