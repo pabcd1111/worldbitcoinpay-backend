@@ -12,6 +12,9 @@ var randomize = require("randomatic")
 // }
 
 const SendEmail=require('../Utils/SendEmail')
+
+const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },]
+
 module.exports = async function AdminSingleUserRegister(req, res) {
 
     const User = mongoose.model("User");
@@ -72,8 +75,9 @@ module.exports = async function AdminSingleUserRegister(req, res) {
         })
         await newUser.save();
         await newTransaction.save();
-        SendEmail("Account Approved", `<b>${req.body.fName} ${req.body.lName}</b>, your ID proof document has been successfully verified. Now you can start trading crypto currency on Swiftbusinesspay. <br/> In case of any query please feel free to contact us at <a href="swiftbusinesspaydepartment@gmail.com" >swiftbusinesspaydepartment@gmail.com<a/> <br/> Thank you for your patience and interest. `, req.body.email);
-        SendEmail("Welcome!", `<h1>${req.body.fName} ${req.body.lName}</h1> <br/> <h2>Welcome to Swiftbusinesspay</h2> <br/> We are glad you have choosen Swiftbusinesspay! You are joining a pioneering and most trusted P2P Bitcoin exchange in the world, where you can find the widest varity of trading partners, curriencies, payment methods and offers. <br/> <hr/> <br/>`, req.body.email);
+        SendEmail("Account Approved", `<b>${req.body.fName} ${req.body.lName}</b>, your ID proof document has been successfully verified. Now you can start trading crypto currency on worldbitcoinpay. <br/> In case of any query please feel free to contact us at <a href="worldbitcoinpay@gmail.com" >worldbitcoinpay@gmail.com<a/> <br/> Thank you for your patience and interest. `, req.body.email, attachment);
+
+        SendEmail("Welcome!", `<h1>${req.body.fName} ${req.body.lName}</h1> <br/> <h2>Welcome to worldbitcoinpay</h2> <br/> We are glad you have choosen worldbitcoinpay! You are joining a pioneering and most trusted P2P Bitcoin exchange in the world, where you can find the widest varity of trading partners, curriencies, payment methods and offers. <br/> <hr/> <br/>`, req.body.email, attachment);
 
         res.status(200).json({ message: "Account Created" })
     }

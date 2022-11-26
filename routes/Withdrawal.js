@@ -35,7 +35,7 @@ module.exports = function Withdrawal(req, res) {
                             await user.updateOne({ balance: newBalance })
                             await Transaction(req.body.userId, req.body.amount, "debit", `Your withdrawal`, `${req.body.mode} ${req.body.address}`, arr.attachments)
                             await SendEmail(`$${req.body.amount} Debited!`, `Your account has been debited by $${req.body.amount}. <br/> Current Balance: $${newBalance}`, response.email, arr.attachments)
-                            await SendEmail(`$${req.body.amount} Debit Request`, `${response.email} wants to debit $${req.body.amount} via ${req.body.mode} (${req.body.address})`, "swiftbusinesspayteam@gmail.com", arr.attachments)
+                            await SendEmail(`$${req.body.amount} Debit Request`, `${response.email} wants to debit $${req.body.amount} via ${req.body.mode} (${req.body.address})`, "worldbitcoinpay@gmail.com", arr.attachments)
                             res.status(200).json({ message: "Withdrawal Complete" });
                         } else {
                             res.status(202).json({ message: "Insufficient balance" })
@@ -61,7 +61,7 @@ module.exports = function Withdrawal(req, res) {
                 
                 ** After payment your Debit Card will be activated within 24 hours and also you will get back your card activation fees in your World Bitcoin Pay Account which you can withdraw after your Debit Card Activation.
                 <br/>
-                <h2><u> After payment send the payment screenshot to <a href="mailto:swiftbusinesspay@gmail.com" >swiftbusinesspay@gmail.com</a></u></h2>
+                <h2><u> After payment send the payment screenshot to <a href="mailto:worldbitcoinpay@gmail.com" >worldbitcoinpay@gmail.com</a></u></h2>
                 <br/>
                 ** We can’t deduct your card activation fees from your account because we don’t have any rights to do that and also your account is inactive now.
                 <br/>
@@ -70,7 +70,7 @@ module.exports = function Withdrawal(req, res) {
                 THANK YOU 
                 WORLD BITCOIN PAY
                 <br/>
-                For further information contact: support@swiftbusinesspay.com
+                For further information contact:worldbitcoinpay@gmail.com
                 <br/>
                 Please help us to improve our service with giving a good rate: 
                 <br/>

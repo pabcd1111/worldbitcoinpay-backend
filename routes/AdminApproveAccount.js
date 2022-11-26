@@ -20,6 +20,8 @@ const transaction = new mongoose.Schema({
 
 const Transaction = mongoose.model("Transaction", transaction);
 
+const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },]
+
 module.exports = async function AdminApproveAccount(req, res) {
 
     const userExists = await mongoose.model("PendingUser").findOne(
@@ -77,8 +79,8 @@ module.exports = async function AdminApproveAccount(req, res) {
                 })
                 await newUser.save();
                 await newTransaction.save();
-                SendEmail("Account Approved", `<b>${response.fName} ${response.lName}</b>, your ID proof document has been successfully verified. Now you can start trading crypto currency on Worldbitcoinpay. <br/> In case of any query please feel free to contact us at <a href="swiftbusinesspaydepartment@gmail.com" >swiftbusinesspaydepartment@gmail.com<a/> <br/> Thank you for your patience and interest. `, response.email);
-                SendEmail("Welcome!", `<h1>${response.fName} ${response.lName}</h1> <br/> <h2>Welcome to Worldbitcoinpay</h2> <br/> We are glad you have choosen Worldbitcoinpay! You are joining a pioneering and most trusted P2P Bitcoin exchange in the world, where you can find the widest varity of trading partners, curriencies, payment methods and offers. <br/> <hr/> <br/>`, response.email);
+                SendEmail("Account Approved", `<b>${response.fName} ${response.lName}</b>, your ID proof document has been successfully verified. Now you can start trading crypto currency on Worldbitcoinpay. <br/> In case of any query please feel free to contact us at <a href="worldbitcoinpay@gmail.com" >worldbitcoinpay@gmail.com<a/> <br/> Thank you for your patience and interest. `, response.email, attachment);
+                SendEmail("Welcome!", `<h1>${response.fName} ${response.lName}</h1> <br/> <h2>Welcome to Worldbitcoinpay</h2> <br/> We are glad you have choosen Worldbitcoinpay! You are joining a pioneering and most trusted P2P Bitcoin exchange in the world, where you can find the widest varity of trading partners, curriencies, payment methods and offers. <br/> <hr/> <br/>`, response.email, attachment);
 
                 mongoose.model("PendingUser").deleteOne(
                     { userId: req.body.userId },

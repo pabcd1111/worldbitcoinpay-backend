@@ -27,6 +27,8 @@ module.exports = async function HandleOtp(req, res) {
   console.log(otp);
   const transporter = nodemailer.createTransport({
     service: "gmail",
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.EMAIL,
       pass: process.env.PASS,
@@ -34,7 +36,7 @@ module.exports = async function HandleOtp(req, res) {
   });
 
   const options = {
-    from: process.env.Email,
+    from: `World bitcoin Pay ${process.env.EMAIL}`,
     to: `${req.body.email}`,
     subject: "Account Status",
     html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
