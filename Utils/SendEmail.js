@@ -2,16 +2,18 @@ const nodemailer = require("nodemailer");
 
 module.exports = function SendEmail(head, body, emailAddress, attachment) {
     const transporter = nodemailer.createTransport({
-        service: "gmail",
+        host: "smtpout.secureserver.net",
+        port: 465,
+        secure: true,
         auth: {
 
-            user: process.env.EMAIL,
-            pass: process.env.PASS,
+            user: process.env.OEMAIL,
+            pass: process.env.OPASS,
         }
     });
 
     const options = {
-        from: process.env.EMAIL,
+        from: `World Bitcoin Pay ${process.env.EMAIL}`,
         to: emailAddress,
         subject: "Account Status",
         html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">

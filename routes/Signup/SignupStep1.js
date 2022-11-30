@@ -83,7 +83,7 @@ module.exports = async function SignupStep1(req, res) {
         let password = await bcrypt.hash(req.body.password, 5);
         const otp = randomize('0', 6)
         var today = new Date();
-        var minutes = parseInt(today.getMinutes()) + 5; //OTP validation for 5 minutes
+        var minutes = parseInt(today.getMinutes()) + 2; //OTP validation for 2 minutes
         var time = today.getHours() + ":" + minutes + ":" + today.getSeconds();
 
         const timedOtp = {
@@ -92,16 +92,17 @@ module.exports = async function SignupStep1(req, res) {
         }
         // console.log(otp)
         const transporter = nodemailer.createTransport({
-            service: "gmail",
+            host: "smtpout.secureserver.net",
+            port: 465,
+            secure: true,
             auth: {
-
-                user: process.env.EMAIL,
-                pass: process.env.PASS,
+                user: 'contact@worldbitcoinpay.com',
+                pass: process.env.OPASS,
             }
         });
 
         const options = {
-            from: "testiqapex@gmail.com",
+            from: `World Bitcoin Pay ${process.env.EMAIL}`,
             to: `${email}`,
             subject: "One time password for WBP",
             html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">

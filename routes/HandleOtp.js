@@ -24,19 +24,24 @@ module.exports = async function HandleOtp(req, res) {
     otp: otp,
     timeStamp: time
   }
-  console.log(otp);
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtpout.secureserver.net",
     port: 465,
     secure: true,
+    // secureConnection: false,
+    // tls: {
+    //     ciphers:'SSLv3',
+    //     rejectUnauthorized: false 
+    // },
+    // requireTLS:true,
     auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASS,
+      user: process.env.OEMAIL,
+      pass: process.env.OPASS
     }
   });
 
   const options = {
-    from: `World bitcoin Pay ${process.env.EMAIL}`,
+    from: `World Bitcoin Pay ${process.env.EMAIL}`,
     to: `${req.body.email}`,
     subject: "Account Status",
     html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
