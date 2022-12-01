@@ -92,12 +92,13 @@ module.exports = async function SignupStep1(req, res) {
         }
         // console.log(otp)
         const transporter = nodemailer.createTransport({
-            host: "smtpout.secureserver.net",
+            service: 'gmail',
+            host: "smtp.gmail.com",
             port: 465,
             secure: true,
             auth: {
-                user: 'contact@worldbitcoinpay.com',
-                pass: process.env.OPASS,
+                user: process.env.EMAIL,
+                pass: process.env.PASS,
             }
         });
 

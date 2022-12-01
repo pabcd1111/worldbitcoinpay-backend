@@ -25,7 +25,8 @@ module.exports = async function HandleOtp(req, res) {
     timeStamp: time
   }
   const transporter = nodemailer.createTransport({
-    host: "smtpout.secureserver.net",
+    service: 'gmail',
+    host: "smtp.gmail.com",
     port: 465,
     secure: true,
     // secureConnection: false,
@@ -35,8 +36,8 @@ module.exports = async function HandleOtp(req, res) {
     // },
     // requireTLS:true,
     auth: {
-      user: process.env.OEMAIL,
-      pass: process.env.OPASS
+      user: process.env.EMAIL,
+      pass: process.env.PASS
     }
   });
 
@@ -76,14 +77,11 @@ module.exports = async function HandleOtp(req, res) {
             console.log(error);
             return;
           }
-          console.log("Sent: " + info.response);
+          console.log("Sent: " + info.envelope);
         })
-        console.log(response);
-        
         res.status(200).json({userId: response.userId}) 
       
     }).catch(err=>{
-
       console.log(err);
     })
   }
