@@ -32,6 +32,7 @@ const user = new mongoose.Schema({
     address: String,
     postalCode: String,
     country: String,
+    city: String,
     balance: Number,
     image: String,
     Id: String,
