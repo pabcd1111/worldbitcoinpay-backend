@@ -10,7 +10,7 @@ const mongoose = require("mongoose")
 const Transaction = require("../Utils/Transaction")
 const SendEmail = require("../Utils/SendEmail")
 
-const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },]
+const attachment = [{ filename: "logo.png", path: __dirname+"/../public/images/logo.png", cid: 'logo' },]
 
 module.exports = async function AdminBalanceControl(req, res) {
 

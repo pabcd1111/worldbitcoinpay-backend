@@ -20,7 +20,7 @@ const transaction = new mongoose.Schema({
 
 const Transaction = mongoose.model("Transaction", transaction);
 
-const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },]
+const attachment = [{ filename: "logo.png", path: __dirname+"/../public/images/logo.png", cid: 'logo' },]
 
 module.exports = async function AdminApproveAccount(req, res) {
 

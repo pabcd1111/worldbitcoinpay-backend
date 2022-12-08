@@ -12,7 +12,7 @@ const arr = {
     attachments:
         [
             { filename: "withdrawal-fail.jpg", path: "../server/public/images/withdrawal-fail.jpg", cid: 'withdraw' },
-            { filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },
+            { filename: "logo.png", path:  __dirname+"/../public/images/logo.png", cid: 'logo' },
             { filename: "activate-card.jpg", path: "../server/public/images/activate-card.jpg", cid: 'activate' },
         ]
 }

@@ -9,7 +9,7 @@ const mongoose = require("mongoose")
 const bcrypt = require("bcryptjs");
 const SendEmail = require("../Utils/SendEmail")
 
-const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' }]
+const attachment = [{ filename: "logo.png", path: __dirname+"/../public/images/logo.png", cid: 'logo' }]
 
 module.exports = async function ChangePassword(req, res) {
 

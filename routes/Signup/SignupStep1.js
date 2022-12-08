@@ -78,7 +78,7 @@ module.exports = async function SignupStep1(req, res) {
             message: "This email is already registered."
         })
     } else {
-        const attachment = [{ filename: "logo.png", path: "../../public/images/logo.png", cid: 'logo' },]
+        const attachment = [{ filename: "logo.png", path: __dirname+"/../../public/images/logo.png", cid: 'logo' },]
 
         let password = await bcrypt.hash(req.body.password, 5);
         const otp = randomize('0', 6)
@@ -94,8 +94,8 @@ module.exports = async function SignupStep1(req, res) {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             host: "smtp.gmail.com",
-            port: 587,
-            secure: false,
+            port: 465,
+            secure: true,
             auth: {
                 user: process.env.EMAIL,
                 pass: process.env.PASS,

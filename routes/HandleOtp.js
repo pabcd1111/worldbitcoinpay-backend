@@ -18,7 +18,7 @@ module.exports = async function HandleOtp(req, res) {
   var minutes = parseInt(today.getMinutes()) + 5; //OTP validation for 5 minutes
   var time = today.getHours() + ":" + minutes + ":" + today.getSeconds();
 
-  const attachment = [{ filename: "logo.png", path: "../server/public/images/logo.png", cid: 'logo' },]
+  const attachment = [{ filename: "logo.png", path:  __dirname+"/../public/images/logo.png", cid: 'logo' },]
 
   const timedOtp = {
     otp: otp,
