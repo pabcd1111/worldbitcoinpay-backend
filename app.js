@@ -9,11 +9,8 @@ const app = express();
 const auth = require("./Middleware/authenticate");
 const adminAuth = require("./Middleware/adminAuthenticate");
 const changePasswordAuth = require("./Middleware/changePasswordAuth");
-var corsOptions = {
-  origin: "https://worldbitcoinpay.com/",
-  optionsSuccessStatus: 200, // For legacy browser support
-};
-app.use(cors(corsOptions));
+
+app.use(cors());
 
 var multerS3 = require("multer-s3");
 var aws = require("aws-sdk");
