@@ -251,8 +251,29 @@ app.post("/tempblockeduserstatus", adminAuth, TempBlockedUserStatus);
 // setInterval(function() {
 //     http.get("http://swiftbusinesspay457658-back.herokuapp.com");
 // }, 300000); // every 5 minutes (300000)
+const https = require("https");
+const fs = require("fs");
+
+const bodyParser = require("body-parser");
+  
+// Configuring express to use body-parser
+// as middle-ware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 let port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server started at port ${port}`);
+//app.listen(port, () => {
+ /// console.log(`Server started at port ${port}`);
+//});
+
+const options = {
+  key: fs.readFileSync("server.key"),
+  cert: fs.readFileSync("server.cert"),
+};
+  
+// Creating https server by passing
+// options and app object
+https.createServer(options, app)
+.listen(port, function (req, res) {
+  console.log("Server started at port 5000 with https");
 });
