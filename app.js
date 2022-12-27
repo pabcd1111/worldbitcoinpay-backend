@@ -262,18 +262,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let port = process.env.PORT || 5000;
-//app.listen(port, () => {
- /// console.log(`Server started at port ${port}`);
-//});
+app.listen(port, () => {
+  console.log(`Server started at port ${port}`);
+});
 
-const options = {
-  key: fs.readFileSync("server.key"),
-  cert: fs.readFileSync("server.cert"),
-};
+//const options = {
+ // key: fs.readFileSync("server.key"),
+ // cert: fs.readFileSync("server.cert"),
+//};
   
 // Creating https server by passing
 // options and app object
-https.createServer(options, app)
-.listen(port, function (req, res) {
-  console.log("Server started at port 5000 with https");
-});
+//https.createServer(options, app)
+//.listen(port, function (req, res) {
+ // console.log("Server started at port 5000 with https");
+//});
